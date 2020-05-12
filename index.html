@@ -12,17 +12,68 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WellFit</title>
     <style>
+        .main{
+            display: none;
+        }
         .fa {
             font-size: 20px;
         }
         #logo:hover{
             background-color: transparent;
         }
-        
+        .loader {
+            position:sticky;
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #f11515; /* Blue */
+            border-radius: 170px;
+            width: 170px;
+            left: 43%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+            height: 170px;
+            animation: spin 2s linear infinite;
+          }
+          
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          .loader_main{
+              width: 100%;
+              height: 100%;
+            position: absolute;
+            background-image: linear-gradient( purple, blue, red);
+          }
+         
     </style>
 </head>
-<div class="loader"></div>
+
 <body class="body">
+
+<div class="loader_main">
+    <div class="loader"></div>
+    </div>
+
+<div class="main">
+    <script>function onReady(callback) {
+        var intervalId = window.setInterval(function() {
+          if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalId);
+            callback.call(this);
+          }
+        }, 1000);
+      }
+      
+      function setVisible(selector, visible) {
+        document.querySelector(selector).style.display = visible ? 'block' : 'none';
+      }
+      
+      onReady(function() {
+        setVisible('.main', true);
+        setVisible('.loader', false);
+        setVisible('.loader_main', false);
+      });</script>
+
     <script src="wow.min.js"></script>
     <script>
     new WOW().init();
@@ -223,7 +274,7 @@
             //image_count_1++;
         }
     </script>
-
+</div>
 </body>
 
 </html>
